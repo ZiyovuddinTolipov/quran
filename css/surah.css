@@ -1,0 +1,79 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+body {
+    overflow: hidden;
+}
+#surah-name-list::-webkit-scrollbar {
+    width: 10px;
+}
+
+#surah-name-list::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+}
+
+#surah-name-list::-webkit-scrollbar-thumb {
+    background: red;
+    border-radius: 10px;
+}
+
+#surah-name-list::-webkit-scrollbar-thumb:hover {
+    background: #b30000;
+}
+.surah-page {
+    width: 100%;
+    height: 100svh;
+    display: flex;
+    align-items: start;
+    flex-direction: row;
+    
+}
+.surah-page .surah-sidebar {
+    background: #c4dad2;
+    width: 30%;
+    max-width: 350px;
+    height: 100svh;
+    padding: 2rem;
+    border-right: 2px solid #fff;
+    overflow-y: scroll;
+    scrollbar-width: 3px;
+}
+.surah-sidebar ol {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.surah-sidebar ol > li a {
+    color: #16423c;
+    font-size: 1.5rem;
+    text-decoration: none;
+}
+.surah-page .surah-menu {
+    width: 100%;
+    background: rgb(4, 141, 93);
+    color: #c4dad2;
+    height: 100svh;
+    padding-top: 2rem;
+}
+.surah-menu h1 {
+    text-align: center;
+}
+.surah-menu__ayahs {
+    width: 90%;
+    height: auto;
+    margin: 0 auto;
+    border: 2px solid red;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.surah-ayahs__card {
+    width: 100%;
+    height: 150px;
+    background: linear-gradient(45deg, #6a9c89, #27baa7);
+}
