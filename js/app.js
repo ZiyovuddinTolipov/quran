@@ -7,6 +7,7 @@ fetch("https://api.alquran.cloud/v1/surah")
       let card = document.createElement("div");
       card.className = "box";
       card.innerHTML = `
+            <a href='/surah.html?id=${surah.number}'>
             <div class="box-lb">
                 <span>${surah.number}</span>
             </div>
@@ -20,19 +21,17 @@ fetch("https://api.alquran.cloud/v1/surah")
                     <p>${surah.name}</p>
                 </div>
                 <div class="box-img">
-                    <img src=${
-                      surah.revelationType == "Meccan"
-                        ? "images/mecca.png"
-                        : "images/medinah.png"
-                    } alt="${surah.englishName} image" class="mosque-img"> 
+                    <img src=${surah.revelationType == "Meccan"
+          ? "images/mecca.png"
+          : "images/medinah.png"
+        } alt="${surah.englishName} image" class="mosque-img"> 
                 </div>
             </div>
+            </a>
       `;
       list.appendChild(card);
     });
   });
-
-
 
 fetch("https://api.alquran.cloud/v1/surah/1")
   .then((response) => response.json())

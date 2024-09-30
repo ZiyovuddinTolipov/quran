@@ -7,7 +7,7 @@ fetch("https://api.alquran.cloud/v1/surah")
         res.data.forEach(surah => {
             let li = document.createElement('li');
             li.innerHTML = `
-            <a href="?id=${surah.number}">${surah.number}) ${surah.englishName}(${surah.name})</a>
+            <a href="?id=${surah.number}">${surah.number}) ${surah.englishName} (${surah.name})</a>
             `
             listOfSurah.appendChild(li)
         });
