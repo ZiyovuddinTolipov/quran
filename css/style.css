@@ -3,6 +3,9 @@ body {
     background-color: #1C1C2E;
 
 }
+:root {
+    --gradient:linear-gradient(to right, #a7f3d0, #14b8a6);
+}
 #list {
         display: grid;
     grid-template-columns: repeat(1, 1fr); /* 1 column for mobile */
@@ -47,7 +50,7 @@ body {
 }
 
 .box {
-    background:  linear-gradient(135deg, #EDF0F1, #D1D9DB);
+    background: linear-gradient(to right, #a7f3d0, #14b8a6);
     width: 24rem;
     height: 12rem;
     position: relative;
@@ -60,7 +63,7 @@ body {
 .box .box-rt {
     width: 4rem;
     height: 2rem;
-    background: #1C1C2E; 
+    background: transparent; 
     display: inline-block;
     position: absolute;
     font-size: 1.2rem;
@@ -76,7 +79,7 @@ body {
     height: 1.6rem;
     border-radius: 1rem;
     text-align: center;
-    background: linear-gradient(135deg, #D9E4DE, #acd8c0);
+    background: linear-gradient(to right, #a7f3d0, #14b8a6);
 }
 .box .box-rt {
     right: 0;
@@ -89,7 +92,7 @@ body {
     text-align: center;
     display: inline-block;
     border-radius: 1rem;
-    background: linear-gradient(135deg, #D9E4DE, #acd8c0);
+    background: linear-gradient(to right, #a7f3d0, #14b8a6);
 }
 .box-body {
     display: flex;
