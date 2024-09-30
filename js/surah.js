@@ -19,7 +19,7 @@ fetch("https://api.alquran.cloud/v1/surah")
 const params = new URLSearchParams(document.location.search);
 let surahID = params.get('id')
 
-fetch(`https://api.alquran.cloud/v1/surah/${surahID}`)
+fetch(`https://api.alquran.cloud/v1/surah/${surahID ? surahID: 1}`)
     .then(request => request.json())
     .then(res => {
         console.log(res.data.ayahs)
