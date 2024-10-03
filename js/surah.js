@@ -44,22 +44,27 @@ const params = new URLSearchParams(document.location.search);
 let surahID = params.get('id');
 console.log('surahid '+surahID)
 
-fetch(`https://api.alquran.cloud/v1/surah/${surahID ? surahID : 2}/uz.sodik`)
-    .then(request => request.json())
-    .then(res => {
-        // Save the selected surah ID to localStorage
-        localStorage.setItem('lastSurahID', surahID);
+Promise.all([
+    fetch(`https://api.alquran.cloud/v1/surah/${surahID ? surahID : 2}/uz.sodik`).then(request => request.json()),
+    fetch(`https://api.alquran.cloud/v1/surah/${surahID ? surahID : 2}`).then(request => request.json())
+])
+.then(([resUz, resAr]) => {
+    // Save the selected surah ID to localStorage
+    localStorage.setItem('lastSurahID', surahID);
 
-        console.log(res.data);
-        menuAyahslist.innerHTML = ''; // Clear previous ayahs
-        res.data.ayahs.forEach(ayah => {
-            let li = document.createElement('li');
-            let arabicNumber = ayah.numberInSurah.toString().replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
-            li.innerHTML = `${ayah.text} <span>${arabicNumber}</span>`;
-            menuAyahslist.appendChild(li);
-        });
+    console.log(resUz.data, resAr.data); // Log both responses
+    menuAyahslist.innerHTML = ''; // Clear previous ayahs
+    resUz.data.ayahs.forEach((ayah, index) => {
+        let li = document.createElement('li');
+        let arabicNumber = ayah.numberInSurah.toString().replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
+        li.innerHTML = `
+        <p class="arabic-text"><span>${arabicNumber})</span>${resAr.data.ayahs[index].text}</p>
+        <p><span>${ayah.numberInSurah}</span> - ${ayah.text} </p>
+         `; // Display both texts
+        menuAyahslist.appendChild(li);
+    });
 
-        surahRevaledInfo.textContent = `${res.data.revelationType == "Meccan" ? "Makka" : 'Madina'}da nozil bo'lgan, ${res.data.numberOfAyahs} oyatdan iborat.`;
-        menuSurahName.textContent = res.data.englishName + ' ' + res.data.name;
-    })
-    .catch(error => console.error(error));
+    surahRevaledInfo.textContent = `${resAr.data.revelationType == "Meccan" ? "Makka" : 'Madina'}da nozil bo'lgan, ${resAr.data.numberOfAyahs} oyatdan iborat.`;
+    menuSurahName.textContent = resAr.data.englishName + ' ' + resAr.data.name;
+})
+.catch(error => console.error(error));
