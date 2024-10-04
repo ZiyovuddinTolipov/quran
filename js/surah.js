@@ -45,8 +45,8 @@ let surahID = params.get('id');
 console.log('surahid '+surahID)
 
 Promise.all([
-    fetch(`https://api.alquran.cloud/v1/surah/${surahID ? surahID : 2}/uz.sodik`).then(request => request.json()),
-    fetch(`https://api.alquran.cloud/v1/surah/${surahID ? surahID : 2}`).then(request => request.json())
+    fetch(`https://api.alquran.cloud/v1/surah/${surahID ? surahID : 1}/uz.sodik`).then(request => request.json()),
+    fetch(`https://api.alquran.cloud/v1/surah/${surahID ? surahID : 1}`).then(request => request.json())
 ])
 .then(([resUz, resAr]) => {
     // Save the selected surah ID to localStorage
@@ -58,8 +58,14 @@ Promise.all([
         let li = document.createElement('li');
         let arabicNumber = ayah.numberInSurah.toString().replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
         li.innerHTML = `
-        <p class="arabic-text"><span>${arabicNumber})</span>${resAr.data.ayahs[index].text}</p>
+        <div>
+            <audio src="https://cdn.islamic.network/quran/audio/128/ar.alafasy-2/${ayah.number}.mp3" controls />
+        </div>
+        <div>
+                <p class="arabic-text"><span>${arabicNumber})</span>${resAr.data.ayahs[index].text}</p>
         <p><span>${ayah.numberInSurah}</span> - ${ayah.text} </p>
+        </div>
+
          `; // Display both texts
         menuAyahslist.appendChild(li);
     });
